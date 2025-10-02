@@ -3,6 +3,10 @@ using ts89070.Services;
 
 namespace ts89070.Data;
 
+/// <summary>
+/// A repository implementation for managing <see cref="Person"/> objects, backed by a CSV data store.
+/// Provides methods to perform CRUD operations and query person data by specific criteria.
+/// </summary>
 public sealed class CsvPersonRepository : IPersonRepository
 {
     private readonly PersonCsvStore _store;
@@ -15,22 +19,26 @@ public sealed class CsvPersonRepository : IPersonRepository
         Reload();
     }
 
+    /// <summary>
+    /// Reloads the internal cache of <see cref="Person"/> objects from the CSV data source.
+    /// This method acquires a lock to ensure thread-safety during the reload operation.
+    /// </summary>
     private void Reload()
     {
         lock (_gate)
-        {
             _cache = CsvLoader.Load(_store.CsvPath).ToList();
-        }
     }
 
     public Task<IReadOnlyList<Person>> GetAllAsync(CancellationToken ct)
     {
-        lock (_gate) return Task.FromResult((IReadOnlyList<Person>)_cache.ToList());
+        lock (_gate) 
+            return Task.FromResult((IReadOnlyList<Person>)_cache.ToList());
     }
 
     public Task<Person?> GetByIdAsync(int id, CancellationToken ct)
     {
-        lock (_gate) return Task.FromResult(_cache.FirstOrDefault(p => p.Id == id));
+        lock (_gate) 
+            return Task.FromResult(_cache.FirstOrDefault(p => p.Id == id));
     }
 
     public Task<IReadOnlyList<Person>> GetByColorAsync(string color, CancellationToken ct)
@@ -48,10 +56,7 @@ public sealed class CsvPersonRepository : IPersonRepository
         {
             input.Id = _cache.Count == 0 ? 1 : _cache.Max(p => p.Id) + 1;
 
-            // Сначала пишем в файл (источник истины для CSV-варианта)
             _store.Append(input);
-
-            // Потом обновляем кеш
             _cache.Add(input);
 
             return Task.FromResult(input);

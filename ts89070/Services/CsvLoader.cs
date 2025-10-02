@@ -6,7 +6,6 @@ namespace ts89070.Services;
 
 public sealed class CsvLoader
 {
-    // 1..7 -> цвет (из README)
     private static readonly Dictionary<int, string> ColorMap = new()
     {
         {1,"blau"}, {2,"grün"}, {3,"violett"}, {4,"rot"},
@@ -131,9 +130,6 @@ public sealed class CsvLoader
 
     private static string[] SplitByComma(string input)
     {
-        // Простой сплиттер — полей всего 4, кавычек в данных нет
-        // Разбиваем максимум на 4 части, чтобы "город, с запятой" (если вдруг появится)
-        // не разносил структуру. Если будет больше запятых — последние части склеятся.
         var parts = new List<string>(4);
         int taken = 0;
         int last = 0;

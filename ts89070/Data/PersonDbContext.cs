@@ -3,9 +3,8 @@ using ts89070.Domain;
 
 namespace ts89070.Data;
 
-public sealed class PersonDbContext : DbContext
+public sealed class PersonDbContext(DbContextOptions<PersonDbContext> options) : DbContext(options)
 {
-    public PersonDbContext(DbContextOptions<PersonDbContext> options) : base(options) { }
     public DbSet<Person> Persons => Set<Person>();
 
     protected override void OnModelCreating(ModelBuilder b)

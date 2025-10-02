@@ -2,7 +2,7 @@ namespace ts89070.Domain;
 
 public sealed class Person
 {
-    public int Id { get; set; }                // ID или номер строки в CSV
+    public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string Lastname { get; set; } = null!;
     public string Zipcode { get; set; } = null!;
