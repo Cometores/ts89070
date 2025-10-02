@@ -5,21 +5,13 @@ namespace ts89070.Data;
 
 public sealed class CsvPersonRepository : IPersonRepository
 {
-    private readonly string _csvPath;
+    private readonly PersonCsvStore _store;
     private readonly object _gate = new();
     private List<Person> _cache = new();
 
-    public CsvPersonRepository(IConfiguration cfg, IWebHostEnvironment env)
+    public CsvPersonRepository(PersonCsvStore store)
     {
-        // appsettings: DataSources:PersonCsv:Location + Filename
-        // Если Location не задан — используем текущую директорию запуска (требование из README). :contentReference[oaicite:2]{index=2}
-        var location = cfg["DataSources:PersonCsv:Location"];
-        if (string.IsNullOrWhiteSpace(location))
-            location = AppContext.BaseDirectory;
-
-        var filename = cfg["DataSources:PersonCsv:Filename"] ?? "sample-input.csv";
-        _csvPath = Path.Combine(location, filename);
-
+        _store = store;
         Reload();
     }
 
@@ -27,7 +19,7 @@ public sealed class CsvPersonRepository : IPersonRepository
     {
         lock (_gate)
         {
-            _cache = CsvLoader.Load(_csvPath).ToList();
+            _cache = CsvLoader.Load(_store.CsvPath).ToList();
         }
     }
 
@@ -52,11 +44,16 @@ public sealed class CsvPersonRepository : IPersonRepository
 
     public Task<Person> CreateAsync(Person input, CancellationToken ct)
     {
-        // Для CSV — просто добавляем в память. (Бонус: можно дописать в файл, но задание это не требует.)
         lock (_gate)
         {
             input.Id = _cache.Count == 0 ? 1 : _cache.Max(p => p.Id) + 1;
+
+            // Сначала пишем в файл (источник истины для CSV-варианта)
+            _store.Append(input);
+
+            // Потом обновляем кеш
             _cache.Add(input);
+
             return Task.FromResult(input);
         }
     }

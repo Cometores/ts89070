@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ts89070.Data;
 using ts89070.Domain;
+using ts89070.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,12 +18,12 @@ string activeDataSource =
 if (activeDataSource.Equals("EF", StringComparison.OrdinalIgnoreCase))
 {
     builder.Services.AddDbContext<PersonDbContext>(opt =>
-        opt.UseSqlite(builder.Configuration.GetConnectionString("PersonDb"))); // или SqlServer
-
+        opt.UseSqlite(builder.Configuration.GetConnectionString("PersonDb")));
     builder.Services.AddScoped<IPersonRepository, EfPersonRepository>();
 }
 else
 {
+    builder.Services.AddSingleton<PersonCsvStore>();
     builder.Services.AddSingleton<IPersonRepository, CsvPersonRepository>();
 }
 
