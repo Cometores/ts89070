@@ -35,8 +35,8 @@ public static class PersonsHandler
         {
             return Results.BadRequest(new { error = "All properties except Id are required." });
         }
-
-        // Id игнорируем — задаётся репозиторием
+        
+        // id created by the repository
         input.Id = 0;
         var created = await repo.CreateAsync(input, ct);
         return Results.Ok(created);
