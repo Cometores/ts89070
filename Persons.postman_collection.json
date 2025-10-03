@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "3eddad30-fb35-4d01-94dc-27e3f0a7093a",
+		"name": "Persons",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14906710"
+	},
+	"item": [
+		{
+			"name": "non-existent path (Not found)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/people",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"people"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Persons (OK)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/persons",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person by Id (OK)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/persons/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"persons",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get non-existent Person by Id (Not found)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/persons/100",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"persons",
+						"100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Person (Created)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"string\",\r\n    \"lastname\": \"string\",\r\n    \"zipcode\": \"string\",\r\n    \"city\": \"string\",\r\n    \"color\": \"string\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/persons/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"persons",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Person without Name (Bad request, specified)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"lastname\": \"string\",\r\n    \"zipcode\": \"string\",\r\n    \"city\": \"string\",\r\n    \"color\": \"string\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/persons/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"persons",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Person wrong Body (Bad request, generic)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"lastname\": \"string\",\r\n    \"zipcode\": \"string\",\r\n    \"city\": \"string\",\r\n    \"color\": \"string\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "{{baseURL}}/persons/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"persons",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Persons by color string (OK)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/persons/color/blau",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"persons",
+						"color",
+						"blau"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person by color Id (OK)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/persons/color/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"persons",
+						"color",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person by name (Bad request)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/persons/eric",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"persons",
+						"eric"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
