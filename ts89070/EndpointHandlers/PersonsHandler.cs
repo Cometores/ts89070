@@ -19,8 +19,22 @@ public static class PersonsHandler
         return person is null ? Results.NotFound() : Results.Ok(person);
     }
     
-    public static async Task<IResult> GetPersonByColorAsync(string color, IPersonRepository repo, CancellationToken ct)
+    public static async Task<IResult> GetPersonsByColorAsync(
+        string colorOrId,
+        IPersonRepository repo,
+        CancellationToken ct)
     {
+        string color = colorOrId;
+        
+        // if we got an id
+        if (int.TryParse(colorOrId, out var id))
+        {
+            if (!ColorMapper.ColorMap.TryGetValue(id, out var mapped))
+                return Results.NotFound();
+
+            color = mapped;
+        }
+
         var list = await repo.GetByColorAsync(color, ct);
         return list.Count == 0 ? Results.NotFound() : Results.Ok(list);
     }
@@ -38,8 +52,6 @@ public static class PersonsHandler
     
         input.Id = 0;
         var created = await repo.CreateAsync(input, ct);
-
-        // URL на созданный ресурс — можно собрать вручную
         var location = $"/persons/{created.Id}";
 
         return Results.Created(location, created);

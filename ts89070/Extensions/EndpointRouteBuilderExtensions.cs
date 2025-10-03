@@ -17,7 +17,7 @@ public static class EndpointRouteBuilderExtensions
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status404NotFound);
 
-        endpointRouteBuilder.MapGet("/persons/color/{color}", PersonsHandler.GetPersonByColorAsync)
+        endpointRouteBuilder.MapGet("/persons/color/{colorOrId}", PersonsHandler.GetPersonsByColorAsync)
             .WithName("GetPersonsByColor")
             .Produces<List<Person>>()
             .Produces(StatusCodes.Status404NotFound);

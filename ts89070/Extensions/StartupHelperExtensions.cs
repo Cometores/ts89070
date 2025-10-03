@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using ts89070.Data;
+using ts89070.Data.CSV;
+using ts89070.Data.DB;
 using ts89070.Domain;
-using ts89070.Services;
 
 namespace ts89070.Extensions;
 
@@ -22,7 +23,6 @@ internal static class StartupHelperExtensions
 
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
-        app.UseProblemDetails();
         app.UseHttpsRedirection();
         app.UseSwagger();
         app.UseSwaggerUI();
@@ -41,8 +41,8 @@ internal static class StartupHelperExtensions
         }
         else
         {
-            builder.Services.AddSingleton<PersonCsvStore>();
-            builder.Services.AddSingleton<IPersonRepository, CsvPersonRepository>();
+            builder.Services.AddScoped<PersonCsvStore>();
+            builder.Services.AddScoped<IPersonRepository, CsvPersonRepository>();
         }
     }
 }

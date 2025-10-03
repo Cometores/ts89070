@@ -1,7 +1,7 @@
 using System.Text;
 using ts89070.Domain;
 
-namespace ts89070.Services;
+namespace ts89070.Data.CSV;
 
 public sealed class PersonCsvStore
 {
@@ -62,6 +62,4 @@ public sealed class PersonCsvStore
         if (!needQuote) return value;
         return $"\"{value.Replace("\"", "\"\"")}\"";
     }
-
-    private static string Sanitize(string? s) => (s ?? string.Empty).Replace(",", " ").Trim();
 }

@@ -2,7 +2,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using ts89070.Domain;
 
-namespace ts89070.Services;
+namespace ts89070.Data.CSV;
 
 public sealed class CsvLoader
 {
@@ -18,7 +18,7 @@ public sealed class CsvLoader
 
         var rawLines = File.ReadAllLines(csvPath, Encoding.UTF8);
 
-        // Склеим «рваные» записи: копим буфер, пока не получим >=4 поля (3 запятые)
+        // glue together the “broken” records: accumulate the buffer until we get >=4 fields (3 commas)
         var records = CoalesceRecords(rawLines);
 
         var persons = new List<Person>(records.Count);
@@ -26,7 +26,7 @@ public sealed class CsvLoader
 
         foreach (var rec in records)
         {
-            // Ожидаем 4 поля: Lastname, Firstname, "<ZIP> <City>", ColorId
+            // Expecting 4 fields: Lastname, Firstname, “<ZIP> <City>”, ColorId
             var parts = SplitByComma(rec);
             if (parts.Length < 4) continue;
 
@@ -50,17 +50,17 @@ public sealed class CsvLoader
             }
             else
             {
-                // fallback: всё поле -> city, ZIP пустой
+                // fallback: entire field -> city, ZIP empty
                 zipcode = string.Empty;
                 city = zipCity;
             }
 
             if (!int.TryParse(colorRaw, out var colorId) || !ColorMapper.ColorMap.TryGetValue(colorId, out var colorName))
-                continue; // некорректный ColorId — пропускаем
+                continue; // incorrect ColorId — skip
 
             persons.Add(new Person
             {
-                Id = ++id,                // последовательная нумерация
+                Id = ++id,
                 Name = first,
                 Lastname = last,
                 Zipcode = zipcode,
@@ -72,12 +72,7 @@ public sealed class CsvLoader
         return persons;
     }
 
-    /// <summary>
-    /// Наращивает строки, пока в буфере не окажется как минимум 4 поля (3 запятые).
-    /// Это чинит случаи вида:
-    /// "Bart, Bertram, "   \n
-    /// "12313 Wasweißich, 1"
-    /// </summary>
+    
     private static List<string> CoalesceRecords(string[] lines)
     {
         var result = new List<string>();
@@ -85,14 +80,13 @@ public sealed class CsvLoader
 
         foreach (var raw in lines)
         {
-            var line = (raw ?? string.Empty).TrimEnd();
+            var line = raw.TrimEnd();
 
             if (sb.Length > 0)
-                sb.Append(' ');           // добавляем пробел между склеенными кусками
+                sb.Append(' ');
 
             sb.Append(line);
 
-            // Смотрим, достаточно ли полей: 4 поля => минимум 3 запятые
             if (CountCommas(sb) >= 3)
             {
                 var candidate = sb.ToString().Trim();
@@ -103,7 +97,7 @@ public sealed class CsvLoader
             }
         }
 
-        // Если файл закончился, а буфер остался — попробуем добавить как есть
+        // If the file has ended but the buffer remains, let's try adding it as is.
         if (sb.Length > 0)
         {
             var leftover = sb.ToString().Trim();

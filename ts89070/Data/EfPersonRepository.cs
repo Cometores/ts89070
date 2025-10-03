@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ts89070.Data.DB;
 using ts89070.Domain;
 
 namespace ts89070.Data;

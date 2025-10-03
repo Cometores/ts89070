@@ -87,7 +87,7 @@ public class PersonHandlerTests
         _mockRepo.Setup(r => r.GetByColorAsync("Red", It.IsAny<CancellationToken>())).ReturnsAsync(persons);
 
         // Act
-        var result = await PersonsHandler.GetPersonByColorAsync("Red", _mockRepo.Object, CancellationToken.None);
+        var result = await PersonsHandler.GetPersonsByColorAsync("Red", _mockRepo.Object, CancellationToken.None);
 
         // Assert
         var okResult = result as Ok<IReadOnlyList<Person>>;
@@ -102,7 +102,7 @@ public class PersonHandlerTests
         _mockRepo.Setup(r => r.GetByColorAsync("Red", It.IsAny<CancellationToken>())).ReturnsAsync(new List<Person>());
 
         // Act
-        var result = await PersonsHandler.GetPersonByColorAsync("Red", _mockRepo.Object, CancellationToken.None);
+        var result = await PersonsHandler.GetPersonsByColorAsync("Red", _mockRepo.Object, CancellationToken.None);
 
         // Assert
         Assert.That(result, Is.TypeOf<NotFound>());

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using ts89070.Data;
+using ts89070.Data.CSV;
+using ts89070.Data.DB;
 using ts89070.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,7 +32,7 @@ async Task InitializeDatabaseWithCsvData(WebApplication webApplication)
         var filename = cfg["DataSources:PersonCsv:Filename"] ?? "sample-input.csv";
         var path = Path.Combine(location, filename);
 
-        var persons = ts89070.Services.CsvLoader.Load(path);
+        var persons = CsvLoader.Load(path);
         await db.Persons.AddRangeAsync(persons);
         await db.SaveChangesAsync();
     }

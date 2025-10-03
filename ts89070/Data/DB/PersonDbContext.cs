@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ts89070.Domain;
 
-namespace ts89070.Data;
+namespace ts89070.Data.DB;
 
 public sealed class PersonDbContext(DbContextOptions<PersonDbContext> options) : DbContext(options)
 {
