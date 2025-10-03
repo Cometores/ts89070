@@ -15,16 +15,19 @@ internal static class StartupHelperExtensions
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Services.AddProblemDetails();
+
         return builder.Build();
     }
 
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
+        app.UseProblemDetails();
         app.UseHttpsRedirection();
         app.UseSwagger();
         app.UseSwaggerUI();
         app.RegisterPersonsEndpoints();
-        
+
         return app;
     }
 

@@ -6,12 +6,7 @@ namespace ts89070.Services;
 
 public sealed class CsvLoader
 {
-    private static readonly Dictionary<int, string> ColorMap = new()
-    {
-        {1,"blau"}, {2,"grün"}, {3,"violett"}, {4,"rot"},
-        {5,"gelb"}, {6,"türkis"}, {7,"weiß"}
-    };
-
+    
     // ZIP + City: "12345 Berlin" -> ("12345","Berlin")
     private static readonly Regex ZipCityRegex = new(@"^\s*(\d{4,5})\s+(.*)\s*$",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
@@ -21,7 +16,6 @@ public sealed class CsvLoader
         if (!File.Exists(csvPath))
             throw new FileNotFoundException($"CSV not found: {csvPath}");
 
-        // Читаем как UTF-8 (поддерживает ü/emoji и т.п.)
         var rawLines = File.ReadAllLines(csvPath, Encoding.UTF8);
 
         // Склеим «рваные» записи: копим буфер, пока не получим >=4 поля (3 запятые)
@@ -61,7 +55,7 @@ public sealed class CsvLoader
                 city = zipCity;
             }
 
-            if (!int.TryParse(colorRaw, out var colorId) || !ColorMap.TryGetValue(colorId, out var colorName))
+            if (!int.TryParse(colorRaw, out var colorId) || !ColorMapper.ColorMap.TryGetValue(colorId, out var colorName))
                 continue; // некорректный ColorId — пропускаем
 
             persons.Add(new Person

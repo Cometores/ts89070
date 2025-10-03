@@ -122,7 +122,7 @@ public class PersonHandlerTests
         var result = await PersonsHandler.CreatePersonAsync(person, _mockRepo.Object, CancellationToken.None);
 
         // Assert
-        var okResult = result as Ok<Person>;
+        var okResult = result as Created<Person>;
         Assert.That(okResult, Is.Not.Null);
         Assert.That(okResult!.Value, Is.EqualTo(createdPerson));
     }
