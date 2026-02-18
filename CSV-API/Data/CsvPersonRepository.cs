@@ -1,7 +1,4 @@
-using ts89070.Data.CSV;
-using ts89070.Domain;
-
-namespace ts89070.Data;
+namespace CSV;
 
 /// <summary>
 /// A repository implementation for managing <see cref="Person"/> objects, backed by a CSV data store.

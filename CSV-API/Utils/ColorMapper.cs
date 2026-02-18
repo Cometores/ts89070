@@ -1,4 +1,4 @@
-namespace ts89070;
+namespace CSV;
 
 public static class ColorMapper
 {

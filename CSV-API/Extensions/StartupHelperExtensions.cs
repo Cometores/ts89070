@@ -1,10 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using ts89070.Data;
-using ts89070.Data.CSV;
-using ts89070.Data.DB;
-using ts89070.Domain;
 
-namespace ts89070.Extensions;
+namespace CSV;
 
 internal static class StartupHelperExtensions
 {
@@ -23,7 +19,6 @@ internal static class StartupHelperExtensions
 
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
-        app.UseHttpsRedirection();
         app.UseSwagger();
         app.UseSwaggerUI();
         app.RegisterPersonsEndpoints();

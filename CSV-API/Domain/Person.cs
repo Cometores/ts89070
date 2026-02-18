@@ -1,4 +1,4 @@
-namespace ts89070.Domain;
+namespace CSV;
 
 public sealed class Person
 {

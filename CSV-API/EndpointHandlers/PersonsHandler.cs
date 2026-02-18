@@ -1,6 +1,4 @@
-using ts89070.Domain;
-
-namespace ts89070.EndpointHandlers;
+namespace CSV;
 
 public static class PersonsHandler
 {

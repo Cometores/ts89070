@@ -1,7 +1,4 @@
-using ts89070.Domain;
-using ts89070.EndpointHandlers;
-
-namespace ts89070.Extensions;
+namespace CSV;
 
 public static class EndpointRouteBuilderExtensions
 {

@@ -1,7 +1,6 @@
 using System.Text;
-using ts89070.Domain;
 
-namespace ts89070.Data.CSV;
+namespace CSV;
 
 public sealed class PersonCsvStore
 {

@@ -1,10 +1,8 @@
+using CSV;
 using Microsoft.EntityFrameworkCore;
-using ts89070.Data.CSV;
-using ts89070.Data.DB;
-using ts89070.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-var app =builder
+var app = builder
     .ConfigureServices()
     .ConfigurePipeline();
 
@@ -25,7 +23,6 @@ async Task InitializeDatabaseWithCsvData(WebApplication webApplication)
 
     if (!await db.Persons.AnyAsync())
     {
-        // Притащим данные из CSV через твой CsvLoader
         var cfg = scope.ServiceProvider.GetRequiredService<IConfiguration>();
         var location = cfg["DataSources:PersonCsv:Location"];
         if (string.IsNullOrWhiteSpace(location)) location = AppContext.BaseDirectory;

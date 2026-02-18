@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ts89070\ts89070.csproj" />
+      <ProjectReference Include="..\CSV-API\CSV-API.csproj" />
     </ItemGroup>
 
 </Project>

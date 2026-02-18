@@ -1,4 +1,4 @@
-namespace ts89070.Domain;
+namespace CSV;
 
 /// <summary>
 /// Represents a repository interface for managing <see cref="Person"/> entities.
