@@ -1,4 +1,4 @@
-namespace CSV;
+namespace CSVService.API.Domain;
 
 public sealed class Person
 {

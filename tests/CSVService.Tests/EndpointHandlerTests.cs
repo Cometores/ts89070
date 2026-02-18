@@ -1,8 +1,9 @@
-﻿using CSV;
-using Moq;
+﻿using CSVService.API.Domain;
+using CSVService.API.EndpointHandlers;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Moq;
 
-namespace CSV;
+namespace CSVService.Tests;
 
 [TestFixture]
 public class PersonHandlerTests

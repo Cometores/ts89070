@@ -1,4 +1,7 @@
-namespace CSV;
+using CSVService.API.Data.CSV;
+using CSVService.API.Domain;
+
+namespace CSVService.API.Data;
 
 /// <summary>
 /// A repository implementation for managing <see cref="Person"/> objects, backed by a CSV data store.

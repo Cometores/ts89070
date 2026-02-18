@@ -1,7 +1,9 @@
 using System.Text;
 using System.Text.RegularExpressions;
+using CSVService.API.Domain;
+using CSVService.API.Utils;
 
-namespace CSV;
+namespace CSVService.API.Data.CSV;
 
 public sealed class CsvLoader
 {

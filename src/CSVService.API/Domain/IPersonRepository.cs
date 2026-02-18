@@ -1,4 +1,4 @@
-namespace CSV;
+namespace CSVService.API.Domain;
 
 /// <summary>
 /// Represents a repository interface for managing <see cref="Person"/> entities.

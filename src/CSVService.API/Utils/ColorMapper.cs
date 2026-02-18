@@ -1,4 +1,4 @@
-namespace CSV;
+namespace CSVService.API.Utils;
 
 public static class ColorMapper
 {

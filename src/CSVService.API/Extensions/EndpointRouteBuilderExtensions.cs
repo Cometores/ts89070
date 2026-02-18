@@ -1,4 +1,7 @@
-namespace CSV;
+using CSVService.API.Domain;
+using CSVService.API.EndpointHandlers;
+
+namespace CSVService.API.Extensions;
 
 public static class EndpointRouteBuilderExtensions
 {

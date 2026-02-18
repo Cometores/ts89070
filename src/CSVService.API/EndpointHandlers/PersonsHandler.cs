@@ -1,4 +1,7 @@
-namespace CSV;
+using CSVService.API.Domain;
+using CSVService.API.Utils;
+
+namespace CSVService.API.EndpointHandlers;
 
 public static class PersonsHandler
 {

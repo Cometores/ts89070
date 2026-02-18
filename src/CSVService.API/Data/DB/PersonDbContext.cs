@@ -1,6 +1,7 @@
+using CSVService.API.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace CSV;
+namespace CSVService.API.Data.DB;
 
 public sealed class PersonDbContext(DbContextOptions<PersonDbContext> options) : DbContext(options)
 {

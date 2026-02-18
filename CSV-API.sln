@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSV-Service.API", "src\CSV-Service.API\CSV-Service.API.csproj", "{21A4CAF4-89AE-4CE1-B8A8-0E4435CD69C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSVService.API", "src\CSVService.API\CSVService.API.csproj", "{21A4CAF4-89AE-4CE1-B8A8-0E4435CD69C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSV-Service.Tests", "tests\CSV-Service.Tests\CSV-Service.Tests.csproj", "{C0767E0C-0A49-4937-80F4-CAA1CF22489F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSVService.Tests", "tests\CSVService.Tests\CSVService.Tests.csproj", "{C0767E0C-0A49-4937-80F4-CAA1CF22489F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AB15136B-EEBA-41DF-86E1-C1E3DF8EDC15}"
 	ProjectSection(SolutionItems) = preProject

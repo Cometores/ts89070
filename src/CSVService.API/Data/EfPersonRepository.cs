@@ -1,5 +1,8 @@
+using CSVService.API.Data.DB;
+using CSVService.API.Domain;
 using Microsoft.EntityFrameworkCore;
-namespace CSV;
+
+namespace CSVService.API.Data;
 
 /// <summary>
 /// Provides an implementation of the <see cref="IPersonRepository"/> interface using Entity Framework.

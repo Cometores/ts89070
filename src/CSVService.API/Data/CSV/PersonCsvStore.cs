@@ -1,6 +1,8 @@
 using System.Text;
+using CSVService.API.Domain;
+using CSVService.API.Utils;
 
-namespace CSV;
+namespace CSVService.API.Data.CSV;
 
 public sealed class PersonCsvStore
 {

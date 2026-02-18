@@ -1,6 +1,10 @@
+using CSVService.API.Data;
+using CSVService.API.Data.CSV;
+using CSVService.API.Data.DB;
+using CSVService.API.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace CSV;
+namespace CSVService.API.Extensions;
 
 internal static class StartupHelperExtensions
 {
