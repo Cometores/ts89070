@@ -7,7 +7,7 @@ namespace CSVService.API.Data.CSV;
 public sealed class PersonCsvStore
 {
     public string CsvPath { get; }
-    
+
     private readonly object _fsGate = new();
 
     public PersonCsvStore(IConfiguration cfg)
@@ -47,15 +47,15 @@ public sealed class PersonCsvStore
         var zipCity = string.IsNullOrEmpty(zip) ? city : $"{zip} {city}";
         var colorId = ColorMapper.ResolveColorId(p.Color);
 
-        return string.Join(", ", new[] 
-        { 
-            QuoteCsv(last), 
-            QuoteCsv(first), 
-            QuoteCsv(zipCity), 
-            QuoteCsv(colorId.ToString()) 
+        return string.Join(", ", new[]
+        {
+            QuoteCsv(last),
+            QuoteCsv(first),
+            QuoteCsv(zipCity),
+            QuoteCsv(colorId.ToString()),
         });
     }
-    
+
     private static string QuoteCsv(string? value)
     {
         value ??= string.Empty;

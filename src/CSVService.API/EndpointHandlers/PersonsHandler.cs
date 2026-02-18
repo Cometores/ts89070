@@ -10,7 +10,7 @@ public static class PersonsHandler
         var list = await repo.GetAllAsync(ct);
         return Results.Ok(list);
     }
-    
+
     public static async Task<IResult> GetPersonByIdAsync(string id, IPersonRepository repo, CancellationToken ct)
     {
         if (!int.TryParse(id, out var parsed))
@@ -19,14 +19,14 @@ public static class PersonsHandler
         var person = await repo.GetByIdAsync(parsed, ct);
         return person is null ? Results.NotFound() : Results.Ok(person);
     }
-    
+
     public static async Task<IResult> GetPersonsByColorAsync(
         string colorOrId,
         IPersonRepository repo,
         CancellationToken ct)
     {
         string color = colorOrId;
-        
+
         // if we got an id
         if (int.TryParse(colorOrId, out var id))
         {
@@ -39,18 +39,18 @@ public static class PersonsHandler
         var list = await repo.GetByColorAsync(color, ct);
         return list.Count == 0 ? Results.NotFound() : Results.Ok(list);
     }
-    
+
     public static async Task<IResult> CreatePersonAsync(Person input, IPersonRepository repo, CancellationToken ct)
     {
-        if (string.IsNullOrWhiteSpace(input.Name) 
-            || string.IsNullOrWhiteSpace(input.Lastname) 
-            || string.IsNullOrWhiteSpace(input.Zipcode) 
-            || string.IsNullOrWhiteSpace(input.City) 
+        if (string.IsNullOrWhiteSpace(input.Name)
+            || string.IsNullOrWhiteSpace(input.Lastname)
+            || string.IsNullOrWhiteSpace(input.Zipcode)
+            || string.IsNullOrWhiteSpace(input.City)
             || string.IsNullOrWhiteSpace(input.Color))
         {
             return Results.BadRequest(new { error = "All properties except Id are required." });
         }
-    
+
         input.Id = 0;
         var created = await repo.CreateAsync(input, ct);
         var location = $"/persons/{created.Id}";

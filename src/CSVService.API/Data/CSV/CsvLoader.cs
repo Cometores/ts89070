@@ -7,7 +7,7 @@ namespace CSVService.API.Data.CSV;
 
 public sealed class CsvLoader
 {
-    
+
     // ZIP + City: "12345 Berlin" -> ("12345","Berlin")
     private static readonly Regex ZipCityRegex = new(@"^\s*(\d{4,5})\s+(.*)\s*$",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
@@ -66,14 +66,14 @@ public sealed class CsvLoader
                 Lastname = last,
                 Zipcode = zipcode,
                 City = city,
-                Color = colorName
+                Color = colorName,
             });
         }
 
         return persons;
     }
 
-    
+
     private static List<string> CoalesceRecords(string[] lines)
     {
         var result = new List<string>();

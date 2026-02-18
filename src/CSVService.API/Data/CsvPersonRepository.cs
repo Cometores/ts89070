@@ -32,14 +32,14 @@ public sealed class CsvPersonRepository : IPersonRepository
     /// <inheritdoc/>
     public Task<IReadOnlyList<Person>> GetAllAsync(CancellationToken ct)
     {
-        lock (_gate) 
+        lock (_gate)
             return Task.FromResult((IReadOnlyList<Person>)_cache.ToList());
     }
 
     /// <inheritdoc/>
     public Task<Person?> GetByIdAsync(int id, CancellationToken ct)
     {
-        lock (_gate) 
+        lock (_gate)
             return Task.FromResult(_cache.FirstOrDefault(p => p.Id == id));
     }
 

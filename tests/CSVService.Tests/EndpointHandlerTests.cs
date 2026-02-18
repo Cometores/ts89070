@@ -23,7 +23,7 @@ public class PersonHandlerTests
         var persons = new List<Person>
         {
             new() { Id = 1, Name = "Test1", Color = "Red" },
-            new() { Id = 2, Name = "Test2", Color = "Blue" }
+            new() { Id = 2, Name = "Test2", Color = "Blue" },
         };
         _mockRepo.Setup(r => r.GetAllAsync(It.IsAny<CancellationToken>())).ReturnsAsync(persons);
 
@@ -82,7 +82,7 @@ public class PersonHandlerTests
         var persons = new List<Person>
         {
             new() { Id = 1, Name = "Test1", Color = "Red" },
-            new() { Id = 2, Name = "Test2", Color = "Red" }
+            new() { Id = 2, Name = "Test2", Color = "Red" },
         };
         _mockRepo.Setup(r => r.GetByColorAsync("Red", It.IsAny<CancellationToken>())).ReturnsAsync(persons);
 
