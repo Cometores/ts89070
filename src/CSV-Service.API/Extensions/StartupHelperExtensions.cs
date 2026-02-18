@@ -19,8 +19,12 @@ internal static class StartupHelperExtensions
 
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
-        app.UseSwagger();
-        app.UseSwaggerUI();
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
         app.RegisterPersonsEndpoints();
 
         return app;

@@ -8,14 +8,11 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.4" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\README.md">
-        <Link>README.md</Link>
-      </Content>
-      <Content Include="..\sample-input.csv">
+      <Content Include="..\..\sample-input.csv">
         <Link>sample-input.csv</Link>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>

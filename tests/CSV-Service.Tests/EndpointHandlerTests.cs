@@ -2,7 +2,7 @@
 using Moq;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace tests;
+namespace CSV;
 
 [TestFixture]
 public class PersonHandlerTests

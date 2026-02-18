@@ -1,3 +1,8 @@
+# Database
+*.db-shm
+*.db-wal
+identifier.sqlite
+
 ## Project data
 logs/
 CityInfo.API/Migrations/

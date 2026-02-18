@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\CSV-API\CSV-API.csproj" />
+      <ProjectReference Include="..\..\src\CSV-Service.API\CSV-Service.API.csproj" />
     </ItemGroup>
 
 </Project>
