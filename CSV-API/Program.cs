@@ -14,7 +14,6 @@ if (activeDataSource.Equals("EF", StringComparison.OrdinalIgnoreCase))
 
 app.Run();
 
-
 async Task InitializeDatabaseWithCsvData(WebApplication webApplication)
 {
     using var scope = webApplication.Services.CreateScope();
