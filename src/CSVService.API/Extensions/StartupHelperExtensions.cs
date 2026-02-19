@@ -23,6 +23,8 @@ internal static class StartupHelperExtensions
 
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
+        app.UseStatusCodePages();
+
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
