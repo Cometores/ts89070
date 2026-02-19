@@ -14,7 +14,7 @@ public static class PersonsHandler
     public static async Task<IResult> GetPersonByIdAsync(string id, IPersonRepository repo, CancellationToken ct)
     {
         if (!int.TryParse(id, out var parsed))
-            return Results.BadRequest(new { error = "id must be a number" });
+            return Results.Problem(detail: "id must be a number", statusCode: StatusCodes.Status400BadRequest);
 
         var person = await repo.GetByIdAsync(parsed, ct);
         return person is null ? Results.NotFound() : Results.Ok(person);
@@ -48,7 +48,7 @@ public static class PersonsHandler
             || string.IsNullOrWhiteSpace(input.City)
             || string.IsNullOrWhiteSpace(input.Color))
         {
-            return Results.BadRequest(new { error = "All properties except Id are required." });
+            return Results.Problem(detail: "All properties except Id are required.", statusCode: StatusCodes.Status400BadRequest);
         }
 
         input.Id = 0;

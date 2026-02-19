@@ -57,4 +57,19 @@ public class ProblemDetailsTests
         Assert.That(problemDetails, Is.Not.Null);
         Assert.That(problemDetails!.Status, Is.EqualTo((int)HttpStatusCode.NotAcceptable));
     }
+
+    [Test]
+    public async Task GetPersonById_WithInvalidId_ReturnsProblemDetails()
+    {
+        // Act
+        var response = await _client.GetAsync("/persons/eric");
+
+        // Assert
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+
+        var problemDetails = await response.Content.ReadFromJsonAsync<ProblemDetails>();
+        Assert.That(problemDetails, Is.Not.Null);
+        Assert.That(problemDetails!.Status, Is.EqualTo((int)HttpStatusCode.BadRequest));
+        Assert.That(problemDetails.Detail, Is.EqualTo("id must be a number"));
+    }
 }

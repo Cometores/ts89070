@@ -1,5 +1,6 @@
 ﻿using CSVService.API.Domain;
 using CSVService.API.EndpointHandlers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Moq;
 
@@ -59,7 +60,9 @@ public class PersonHandlerTests
         var result = await PersonsHandler.GetPersonByIdAsync("invalid", _mockRepo.Object, CancellationToken.None);
 
         // Assert
-        Assert.That(result.GetType().Name, Does.StartWith("BadRequest"));
+        var problemResult = result as ProblemHttpResult;
+        Assert.That(problemResult, Is.Not.Null);
+        Assert.That(problemResult!.StatusCode, Is.EqualTo(StatusCodes.Status400BadRequest));
     }
 
     [Test]
@@ -137,6 +140,9 @@ public class PersonHandlerTests
         var result = await PersonsHandler.CreatePersonAsync(person, _mockRepo.Object, CancellationToken.None);
 
         // Assert
-        Assert.That(result.GetType().Name, Does.StartWith("BadRequest"));
+        var problemResult = result as ProblemHttpResult;
+        Assert.That(problemResult, Is.Not.Null);
+        Assert.That(problemResult!.StatusCode, Is.EqualTo(StatusCodes.Status400BadRequest));
+        Assert.That(problemResult.ProblemDetails.Detail, Is.EqualTo("All properties except Id are required."));
     }
 }
