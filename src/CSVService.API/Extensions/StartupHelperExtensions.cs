@@ -31,6 +31,7 @@ internal static class StartupHelperExtensions
             app.UseSwaggerUI();
         }
 
+        app.UseNotAcceptableForUnsupportedAccept();
         app.RegisterPersonsEndpoints();
 
         return app;

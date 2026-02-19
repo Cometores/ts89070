@@ -1,4 +1,5 @@
-﻿using System.Net;
+using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -38,5 +39,22 @@ public class ProblemDetailsTests
         Assert.That(problemDetails, Is.Not.Null);
         Assert.That(problemDetails!.Status, Is.EqualTo((int)HttpStatusCode.NotFound));
         Assert.That(problemDetails.Title, Is.Not.Null.Or.Empty);
+    }
+
+    [Test]
+    public async Task UnsupportedAccept_ReturnsProblemDetails()
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get, "/persons");
+        request.Headers.Accept.Clear();
+        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+
+        var response = await _client.SendAsync(request);
+
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotAcceptable));
+        Assert.That(response.Content.Headers.ContentType?.MediaType, Is.EqualTo("application/problem+json"));
+
+        var problemDetails = await response.Content.ReadFromJsonAsync<ProblemDetails>();
+        Assert.That(problemDetails, Is.Not.Null);
+        Assert.That(problemDetails!.Status, Is.EqualTo((int)HttpStatusCode.NotAcceptable));
     }
 }
